@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+
+import sys
+from src import linear_regression
+
+
+def usage():
+    raise(ValueError(
+        'linear_regression: compute an estimation of a and b of the equation f(x) = ax + b given a list of points.\
+        \n\tneed the name on of a csv file in argument. files must be in the data directory.\
+        \n\tex: ./linear_regression data\
+        \n\t\t will get the file ./data/data.csv'
+    ))
+
+
+try:
+    if (len(sys.argv) != 2):
+        usage()
+    filename = sys.argv[1]
+    open('./data/' + filename + '.csv', 'r')
+    linear_regression.run(filename)
+except FileNotFoundError as error:
+    try:
+        print(error)
+        usage()
+    except ValueError as error:
+        print(error)
+except ValueError as error:
+    print(error)
+except ZeroDivisionError as error:
+    print('You need to provide at least 2 different point')
+    print(error)

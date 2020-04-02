@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+
+import sys
+from src import main, is_
+
+
+def usage():
+    raise(ValueError(
+        'estimator2000: need an input for a value of \'x\' (maybe a kilematrage) and output a \'y\' (maybe a price).\
+        \n\tneed one and only one argument wich need to be an integer.\
+        \n\tif values of a and b in equation of f(x) = ax + b is not already computed, it does now on the file ./data/data.csv.\
+        \n\tex: ./estimator2000 150000'
+    ))
+
+
+try:
+    if (len(sys.argv) != 2):
+        usage()
+    if (is_.is_int(sys.argv[1]) == False):
+        usage()
+    distance = int(sys.argv[1])
+    main.compute_price(distance)
+except ValueError as error:
+    print(error)
